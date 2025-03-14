@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./script-ts.js"></script>
+</head>
+<body>
+  <script>
+    console.log('am script');
+  </script>
+
+  <script-ts>
+    console.log('am also script');
+  </script-ts>
+
+  <script-ts id="inline">
+    const hello: string = 'foo';
+    console.debug(`${hello}, I am typescript`);
+  </script-ts>
+  
+  <script-ts id="file" src="./test.ts"></script-ts>
+
+  <script-ts id="invalid-html-nested">
+    <p>nested html</p>
+  </script-ts>
+
+  <div><script-ts id="invalid-script-nested">
+    console.debug('I am in a div');
+  </script-ts></div>
+</body>
+</html>
