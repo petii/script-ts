@@ -2,7 +2,7 @@ function eraseSyntax(contents) {
   let lines = contents.split(/;|\n/).map(l => l.trim());
   lines = lines.map(l => {
     l = l.replace(/\/\/.*$/, '');
-    return l.replaceAll(/:[ a-z0-9]+/gi, '')
+    return l.replaceAll(/:[ a-z0-9<>\[\]]+/gi, '')
   })
   return `${lines.filter(l => l.length > 0).join(';')};`;
 }
