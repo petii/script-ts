@@ -1,22 +1,16 @@
 function eraseSyntax(contents) {
-  let lines = contents.split(/;|\n/).map(l => l.trim()).filter(l => l.length > 0);
+  let lines = contents.split(/;|\n/).map(l => l.trim());
   lines = lines.map(l => {
     l = l.replace(/\/\/.*$/, '');
     return l.replaceAll(/:[ a-z0-9]+/gi, '')
   })
-  return lines.join(';');
+  return `${lines.filter(l => l.length > 0).join(';')};`;
 }
-
-console.log([JSON.stringify(location), location.toString(), location.hostname, location.port])
 
 class ScriptTsStandalone extends HTMLElement {
   constructor() {
     super();
-
-    this.reader = new FileReader();
-    this.reader.onload = () => {
-      this.log('reader', this.reader, this.reader.result);
-    }
+    this.shouldProcess = false;
   }
 
   log(...args) {
@@ -25,7 +19,6 @@ class ScriptTsStandalone extends HTMLElement {
   }
 
   connectedCallback() {
-    // console.log("Custom element added to page.", this, this.attributes);
     setTimeout(() => {
       if (this.parentElement != document.body) {
         throw new Error(`<script-ts> wrapped in ${this.parentElement}`);
@@ -33,29 +26,29 @@ class ScriptTsStandalone extends HTMLElement {
         throw new Error(`<script-ts> has children`);
       }
       this.style = `display: none;`;
-
-      const maybeSrc = this.attributes.getNamedItem('src');
-      if (maybeSrc != null) {
-        this.log('src', maybeSrc.value)
-        fetch(`${maybeSrc.value}`).then(response => response.text())
-          .then((data) => {
-            const actualScript = document.createElement('script');
-            actualScript.innerText = eraseSyntax(data);
-            this.log(
-              actualScript.innerText
-            );;
-            document.body.appendChild(actualScript);
-          });
-        return;
-      }
-
-      const actualScript = document.createElement('script');
-      actualScript.innerText = eraseSyntax(this.firstChild.data);
-      this.log(
-        'actualScript = ', actualScript.innerText
-      );;
-      document.body.appendChild(actualScript);
+      this.shouldProcess = true;
     });
+
+    const maybeSrc = this.attributes.getNamedItem('src');
+    if (maybeSrc != null) {
+      this.log('src =', maybeSrc.value)
+      fetch(`${maybeSrc.value}`).then(response => response.text())
+        .then((data) => {
+          const actualScript = document.createElement('script');
+          actualScript.text = eraseSyntax(data);
+          this.log({originalScript : data, actualScript: actualScript.text});
+          document.body.appendChild(actualScript);
+        });
+      return;
+    } else {
+      setTimeout(()=>{
+        if (!this.shouldProcess) return;
+        const actualScript = document.createElement('script');
+        actualScript.text = this.firstChild && eraseSyntax(this.firstChild.data);
+        this.log({originalScript : this.firstChild.data, actualScript: actualScript.text});
+        document.body.appendChild(actualScript);
+      });
+    }
   }
 
   disconnectedCallback() {

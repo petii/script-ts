@@ -14,7 +14,7 @@
 
   <script-ts id="inline">
     const hello: string = 'foo';
-    console.debug(`${hello}, I am typescript`);
+    console.log(`${hello}, I am typescript`);
   </script-ts>
   
   <script-ts id="file" src="./test.ts"></script-ts>
@@ -23,8 +23,10 @@
     <p>nested html</p>
   </script-ts>
 
-  <div><script-ts id="invalid-script-nested">
-    console.debug('I am in a div');
-  </script-ts></div>
+  <div>
+    <script-ts id="invalid-script-nested">
+      console.log('I am in a div');
+    </script-ts>
+  </div>
 </body>
 </html>
