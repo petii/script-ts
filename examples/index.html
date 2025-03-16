@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="./script-ts.js"></script>
+  <script src="../script-ts.js"></script>
 </head>
 <body>
   <script>
@@ -9,12 +9,12 @@
   </script>
 
   <script-ts>
-    console.log('am also script');
+    console.log('am script-ts');
   </script-ts>
 
   <script-ts id="inline">
-    const hello: string = 'foo';
-    console.log(`${hello}, I am typescript`);
+    const foo: string = 'hello';
+    console.log(`${foo}, am also script-ts`);
   </script-ts>
   
   <script-ts id="file" src="./test.ts"></script-ts>
