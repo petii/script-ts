@@ -1,15 +1,23 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><script-ts></title>
-
-  <script src="https://unpkg.com/mithril/mithril.js"></script>
-  <script src="./script-ts.min.js"></script>
-</head>
-<body>
-  <div id="app"></div>
-  <script-ts src="www/home.ts"></script-ts>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><script-ts></title>
+    <!-- dependencies -->
+    <script src="https://unpkg.com/mithril/mithril.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
+    />
+    <!-- repo contents -->
+    <script src="./script-ts.min.js"></script>
+    <script-ts src="www/styles.ts"></script-ts>
+  </head>
+  <body>
+    <main id="app">
+      <div aria-busy="true"></div>
+    </main>
+    <script-ts id="app-src" src="www/index.ts"></script-ts>
+  </body>
 </html>
