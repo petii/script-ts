@@ -113,6 +113,12 @@ const content = m("main", [
     m(
       "textarea",
       {
+        style: {
+          fontFamily: "monospace",
+          fontSize: "var(--pico-font-size)",
+          color: "var(--pico-code-color)",
+        },
+        spellCheck: false,
         id: "sandbox",
         rows: 3,
         oninput: (node: Event) => {
