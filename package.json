@@ -1,0 +1,19 @@
+{
+  "name": "script-ts",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "fmt": "prettier -w \"./**/*.(ts|js)\"",
+    "build": "esbuild script-ts.ts --bundle --outfile=script-ts.js"
+  },
+  "keywords": [],
+  "author": "petii",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "0.25.1",
+    "prettier": "^3.5.3"
+  },
+  "dependencies": {
+    "ts-blank-space": "^0.6.1"
+  }
+}
