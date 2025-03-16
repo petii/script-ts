@@ -19,7 +19,7 @@ Load the web component by grabbing the bundle and use `<script-ts>` just like
 the regular `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/petii/script-ts/script-ts.min.js"></script>
+<script src="https://petii.github.io/script-ts/script-ts.min.js"></script>
 ...
 <script-ts>
   // while inlining typescript technically works there's not a lot of support for it
