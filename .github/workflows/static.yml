@@ -33,9 +33,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Create JS bundle
-        run:  |
-          npm install
+      - run:  npm install
+      - run:  npm run ts-check
+      - run: npm run fmt-check
+      - name: Create JS bundles
+        run: |
+          npm run full-bundle
           npm run min-bundle
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
