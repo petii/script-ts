@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext", "DOM", "WebWorker"],
-    "allowSyntheticDefaultImports": true
+    "lib": ["ESNext", "DOM"],
+    "allowSyntheticDefaultImports": true,
+    "erasableSyntaxOnly": true,
   }
 }
