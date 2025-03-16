@@ -10,7 +10,7 @@ class ScriptTs extends HTMLElement {
   }
 
   connectedCallback() {
-    this.extractSource().then((source) => {
+    this.extractSource().then((source) => ScriptTs.removeImports(source)).then((source) => {
       const actualScript = document.createElement("script");
       actualScript.text = tsBlankSpace(source);
       this.textContent = "";
@@ -26,6 +26,10 @@ class ScriptTs extends HTMLElement {
       await setTimeoutAsync();
       return this.firstChild?.textContent ?? "";
     }
+  }
+
+  static removeImports(source: string) {
+    return source.replaceAll("import", "// import");
   }
 }
 

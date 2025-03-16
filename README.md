@@ -16,11 +16,16 @@ Load the web component and use `<script-ts>` just like you would the regular `<s
 <script src="https://cdn.jsdelivr.net/gh/petii/script-ts/script-ts.min.js"></script>
 ...
 <script-ts>
-  // there's no real support (yet) for inlined scripts unfortunately but _technically_ it works
+  // while inlining typescript technically works there's not a lot of support for it
+  // in IDEs or syntax highlight
+  const foo: string = 'bar';
 </script-ts>
-<!-- loading files however should help with development -->
+<!-- loading files however could help with development -->
 <script-ts src="you-script.ts"></script-ts>
 ```
+
+> [!CAUTION]
+> To get typescript to play along nicely the component removes (comments out) `import` statements which could have unintended side effects.
 
 ## Development
 ~~Unfortunately it's not as easy as loading up the file but serving it locally should work: `npx serve --cors`~~
