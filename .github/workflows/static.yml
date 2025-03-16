@@ -34,7 +34,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Create JS bundle
-        run:  npm run min-bundle
+        run:  |
+          npm install
+          npm run min-bundle
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -20,9 +20,9 @@
   },
   "scripts": {
     "fmt": "prettier -w \"./**/*.(ts|js)\"",
-    "bundle-cmd": "esbuild script-ts.ts --bundle",
+    "bundle-cmd": "esbuild script-ts.ts --bundle --platform=browser",
     "bundle": "npm run bundle-cmd -- --outfile=script-ts.js",
-    "min-bundle": "npm run bundle-cmd -- --outfile=script-ts.min.js --minify-whitespace --minify-identifiers --minify-syntax"
+    "min-bundle": "npm run bundle-cmd -- --outfile=script-ts.min.js --minify"
   },
   "dependencies": {
     "ts-blank-space": "^0.6.1"
