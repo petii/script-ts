@@ -52,10 +52,14 @@ export class ScriptTs extends HTMLElement {
 
   attributeChangedCallback(name: string, oldValue: unknown, newValue: unknown) {
     this.log("debug", `attribute = ${name}`, `${oldValue} -> ${newValue}`);
-    if (name === "src") {
-      this.extractSource().then((source) => {
-        this.updateScript(source);
-      });
+    switch (name) {
+      case "src":
+        this.extractSource().then((source) => {
+          this.updateScript(source);
+        });
+        break;
+      default:
+        this.log("warn", `change to attribute "${name}" not handled`)
     }
   }
 
